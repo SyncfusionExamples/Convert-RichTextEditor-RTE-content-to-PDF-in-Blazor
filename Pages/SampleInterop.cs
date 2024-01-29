@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
 
-namespace RTEtoPDF
+namespace BlazorRichTextEditorToPDF
 {
     public static class SampleInterop
     {
@@ -36,7 +36,7 @@ namespace RTEtoPDF
                 "jsInterop.throwError", error);
         }
 
-        
+
     }
     public class ErrorMessage
     {

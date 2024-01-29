@@ -1,25 +1,24 @@
 ﻿@page "/"
-@namespace RTEtoPDF.Pages
+@using Microsoft.AspNetCore.Components.Web
+@namespace BlazorRichTextEditorToPDF.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RTEtoPDF</title>
     <base href="~/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
-    <link href="_content/Syncfusion.Blazor/styles/bootstrap4.css" rel="stylesheet" />
+    <link href="BlazorRichTextEditorToPDF.styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link href="_content/Syncfusion.Blazor.Themes/bootstrap5.css" rel="stylesheet" />
+    <script src="_content/Syncfusion.Blazor.Core/scripts/syncfusion-blazor.min.js" type="text/javascript"></script>
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>
-    <app>
-        <component type="typeof(App)" render-mode="ServerPrerendered" />
-    </app>
+    <component type="typeof(App)" render-mode="ServerPrerendered" />
 
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
@@ -36,7 +35,7 @@
     <script>
         function saveAsFile(filename, bytesBase64) {
             if (navigator.msSaveBlob) {
-                //Download document in Edge browser 
+                //Download document in Edge browser
                 var data = window.atob(bytesBase64);
                 var bytes = new Uint8Array(data.length);
                 for (var i = 0; i < data.length; i++) {
@@ -49,11 +48,11 @@
                 var link = document.createElement('a');
                 link.download = filename;
                 link.href = "data:application/octet-stream;base64," + bytesBase64;
-                document.body.appendChild(link); // Needed for Firefox 
+                document.body.appendChild(link); // Needed for Firefox
                 link.click();
                 document.body.removeChild(link);
             }
-        } 
+        }
     </script>
 </body>
 </html>

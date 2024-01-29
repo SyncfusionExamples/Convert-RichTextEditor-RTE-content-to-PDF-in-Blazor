@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Syncfusion.Pdf;
 using Syncfusion.HtmlConverter;
 
-namespace RTEPDF.Data
+namespace BlazorRichTextEditorToPDF.Data
 {
     public class ExportService
     {
@@ -14,38 +14,19 @@ namespace RTEPDF.Data
         {
             try
             {
-                // Initialize the HTML to PDF converter
+                //Initialize HTML to PDF converter.
                 HtmlToPdfConverter htmlConverter = new HtmlToPdfConverter();
-
-                WebKitConverterSettings settings = new WebKitConverterSettings();
-
-                // Used to load resources before convert
-                // Map your local path here
-                string baseUrl = @"C:/Users/TempKaruna/source/repos/RTEtoPDF/wwwroot/images";
-
-                // Set WebKit path
-                // Map your local path installed location here
-                settings.WebKitPath = @"C:/Program Files (x86)/Syncfusion/HTMLConverter/18.1.0.52/QtBinariesDotNetCore";
-
-                // Set additional delay; units in milliseconds;
-                settings.AdditionalDelay = 3000;
-
-                // Assign WebKit settings to HTML converter
-                htmlConverter.ConverterSettings = settings;
-
-                // Convert HTML string to PDF
-                PdfDocument document = htmlConverter.Convert(content, baseUrl);
-
-                // Save the document into stream.
+                BlinkConverterSettings blinkConverterSettings = new BlinkConverterSettings();
+                //Set Blink viewport size.
+                blinkConverterSettings.ViewPortSize = new Syncfusion.Drawing.Size(1280, 0);
+                //Assign Blink converter settings to HTML converter.
+                htmlConverter.ConverterSettings = blinkConverterSettings;
+                //Convert HTML string to PDF document.
+                PdfDocument document = htmlConverter.Convert(content,"");
+                //Create memory stream.
                 MemoryStream stream = new MemoryStream();
-
+                //Save the document to memory stream.
                 document.Save(stream);
-
-                stream.Position = 0;
-
-                // Close the document.
-                document.Close(true);
-
                 return stream;
             }
             catch
